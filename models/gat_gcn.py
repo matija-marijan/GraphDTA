@@ -51,8 +51,11 @@ class GAT_GCN(torch.nn.Module):
         embedded_xt = torch.permute(embedded_xt, (0, 2, 1))
 
         conv_xt = self.conv_xt_1(embedded_xt)
+        conv_xt = self.relu(conv_xt)
         conv_xt = self.conv_xt_2(conv_xt)
+        conv_xt = self.relu(conv_xt)
         conv_xt = self.conv_xt_3(conv_xt)
+        conv_xt = self.relu(conv_xt)
         xt = torch.max(conv_xt, dim = -1)[0]
         xt = self.fc1_xt(xt)
 
